@@ -1,6 +1,6 @@
 var assert = require('assert');
-var ccpo = require('../lib').parseCsv;
-var scpm = require('../lib').saveToDb;
+var ccpo = require('../lib').CallsProcessed.parseCsv;
+var scpm = require('../lib').DbUtils.saveToDb;
 var MongoClient = require('mongodb').MongoClient;
 
 var options = {

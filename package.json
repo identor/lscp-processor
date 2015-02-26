@@ -1,6 +1,6 @@
 {
   "name": "lscp-processor",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "A utility suite for processing calls processed files by call source.",
   "main": "./lib",
   "scripts": {
