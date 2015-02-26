@@ -1,0 +1,25 @@
+{
+  "name": "lscp-processor",
+  "version": "1.0.0",
+  "description": "A utility suite for processing calls processed files by call source.",
+  "main": "./lib",
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "lscp",
+    "leadscore",
+    "mongodb",
+    "productivity"
+  ],
+  "author": "irvin@wiwi.ninja",
+  "license": "ISC",
+  "dependencies": {
+    "camel-case": "^1.1.1",
+    "csv-parse": "0.0.9",
+    "mongodb": "^1.4.31"
+  },
+  "devDependencies": {
+    "mocha": "^2.1.0"
+  }
+}
