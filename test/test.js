@@ -1,6 +1,6 @@
 var assert = require('assert');
-var ccpo = require('../lib').createCallsProcessedObject;
-var scpm = require('../lib').storeCallsProcessedToMongo;
+var ccpo = require('../lib').parseCsv;
+var scpm = require('../lib').saveToDb;
 var MongoClient = require('mongodb').MongoClient;
 
 var options = {
@@ -64,17 +64,19 @@ describe('MongoDB data store Tests.', function () {
     });
   });
   it('should store the 30 elements contained in ' + ecpOne + '.', function (done) {
-    var afterInsert = function () {
+    var afterInsert = function (report) {
+      console.log(report);
       scores.count(function (err, count) {
         assert.equal(30, count);
         return done();
       });
     };
-    scpm(ecpOne, mongodb, afterInsert);
+    scpm(ecpOne, scores, afterInsert);
   });
   it('should not store objects contained in ' + ecpOne + ' twice.', function (done) {
     var insertCount = 0;
-    var afterInsert = function () {
+    var afterInsert = function (report) {
+      console.log(report);
       ++insertCount;
       if (insertCount === 2) {
         scores.count(function (err, count) {
@@ -83,11 +85,12 @@ describe('MongoDB data store Tests.', function () {
         });
       }
     };
-    scpm(ecpOne, mongodb, afterInsert);
-    scpm(ecpOne, mongodb, afterInsert);
+    scpm(ecpOne, scores, afterInsert);
+    scpm(ecpOne, scores, afterInsert);
   });
   it('should store a record in weirdScores.', function (done) {
-    var afterInsert = function () {
+    var afterInsert = function (report) {
+      console.log(report);
       var selector = { _id: 'baed5aa21a92467021b0faf82837e9eaf93c4509' };
       scores.findOne(selector,
           function (err, obj) {
@@ -96,12 +99,13 @@ describe('MongoDB data store Tests.', function () {
         return done();
       });
     };
-    scpm(ecpTwo, mongodb, afterInsert);
+    scpm(ecpTwo, scores, afterInsert);
   });
   it('should not store objects twice.', function (done) {
     this.timeout(0);
     var insertCount = 0;
-    var afterInsert = function () {
+    var afterInsert = function (report) {
+      console.log(report);
       ++insertCount;
       if (insertCount === 2) {
         scores.count(function (err, count) {
@@ -113,9 +117,9 @@ describe('MongoDB data store Tests.', function () {
       scores.count(function (err, count) {
         if (err) throw err;
         assert.equal(count, 3);
-        scpm(ecpTwo, mongodb, afterInsert);
+        scpm(ecpTwo, scores, afterInsert);
       });
     };
-    scpm(ecpTwo, mongodb, afterInsert);
+    scpm(ecpTwo, scores, afterInsert);
   });
 });
