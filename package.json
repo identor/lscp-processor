@@ -19,6 +19,13 @@
     "csv-parse": "0.0.9",
     "mongodb": "^1.4.31"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/identor/lscp-processor"
+  },
+  "bugs": {
+    "url": "https://github.com/identor/lscp-processor/issues"
+  },
   "devDependencies": {
     "mocha": "^2.1.0"
   }
