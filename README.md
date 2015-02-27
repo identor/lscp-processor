@@ -18,7 +18,7 @@ EnhancedLeadScoreCallProcessed20141231.csv the files shall contain call processe
 objects having an elsProcessingEnd within December 31, 2014 UTC, after parsing
 the csv file.
 * Ensuring that every data present in the CSV files are stored in the database.
-* Ensuring that there are no duplicate data in the MongoDB data base to some
+* Ensuring that there are no duplicate data in the MongoDB database to some
 degree (currently using sha-1 hashes to ensure uniqueness of the duplicated callIds).
 
 ## The CSV to JavaScript Object parser
