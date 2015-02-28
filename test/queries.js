@@ -103,4 +103,32 @@ describe('Call Count Tests', function () {
     };
     DbUtils.saveToDb(common.cpOne, scores, common.formatting, saved);
   });
+describe('Enhanced Call Count Tests', function () {
+  var scores;
+  beforeEach(function (done) {
+    var finished = function () {
+      scores = common.scores;
+      done();
+    };
+    common.initDb(finished);
+  });
+  it('should invoke the enhancedCallsProcessedCounts without errors', function (done) {
+    var finished = function (callsProcessed) {
+      done();
+    };
+    queries.enhancedCallsProcessed(scores, finished);
+  });
+  it('should query an enhancedCallsProcessed objects in the db', function (done) {
+    var savedToDb = function () {
+      var finished = function (callsProcessed) {
+        var selector = { scorer: 'ECP HVAC PI Margie Pendon' };
+        var test = lColl.filter(callsProcessed, selector)[0];
+        assert.equal(test.callCount, 9);
+        done();
+      };
+      queries.enhancedCallsProcessed(scores, finished);
+    };
+    DbUtils.saveToDb(common.ecpOne, scores, common.formatting, savedToDb);
+  });
+});
 });
