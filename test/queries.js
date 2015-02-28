@@ -68,4 +68,39 @@ describe('Call Count Tests', function () {
     };
     DbUtils.saveToDb(common.cpOne, scores, common.formatting, saved);
   });
+  it('should retrieve callsProcessedObjects from 12-02-2014 onwards.', function (done) {
+    var finished = function (callsProcessed) {
+      assert.equal(callsProcessed.length, 1);
+      done();
+    };
+    var saved = function () {
+      queries.callsProcessed(scores, new Date(Date.UTC(2014, 11, 02)), finished);
+    };
+    DbUtils.saveToDb(common.cpOne, scores, common.formatting, saved);
+  });
+  it('should retrieve callsProcessedObjects during 12-01-2014.', function (done) {
+    var finished = function (callsProcessed) {
+      assert.equal(callsProcessed.length, 26);
+      done();
+    };
+    var saved = function () {
+      queries.callsProcessed(scores, new Date(Date.UTC(2014, 11, 01)), new Date(Date.UTC(2014, 11, 02)), finished);
+    };
+    DbUtils.saveToDb(common.cpOne, scores, common.formatting, saved);
+  });
+  it('should retrieve callsProcessedObjects of \'ARPIAJBuenaAU\' from 12-01-2014 to 12-02-2014.', function (done) {
+    var finished = function (callsProcessed) {
+      assert.equal(callsProcessed.length, 2);
+      done();
+    };
+    var saved = function () {
+      var selector = { scorer: 'ARPIAJBuenaAU' };
+      queries.scorerCallsProcessed(scores, selector.scorer,
+                                   new Date(Date.UTC(2014, 11, 01)),
+                                   new Date(Date.UTC(2014, 11, 03)),
+                                   finished
+                                  );
+    };
+    DbUtils.saveToDb(common.cpOne, scores, common.formatting, saved);
+  });
 });

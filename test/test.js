@@ -9,7 +9,6 @@ describe('LSCP Parser', function () {
   });
   it('should create an array with 30 elements', function (done) {
     var csvPath = 'test/ECPwiththirtyelements.csv';
-    console.log('Processing file:', csvPath);
     ccpo(csvPath, common.formatting, function (callsProcessedObjects) {
       assert.equal(callsProcessedObjects.length, 30);
       done();
@@ -35,7 +34,6 @@ describe('MongoDB data store Tests.', function () {
   });
   it('should store the 30 elements contained in ' + ecpOne + '.', function (done) {
     var afterInsert = function (report) {
-      console.log(report);
       scores.count(function (err, count) {
         assert.equal(30, count);
         return done();
@@ -46,7 +44,6 @@ describe('MongoDB data store Tests.', function () {
   it('should not store objects contained in ' + ecpOne + ' twice.', function (done) {
     var insertCount = 0;
     var afterInsert = function (report) {
-      console.log(report);
       ++insertCount;
       if (insertCount === 2) {
         scores.count(function (err, count) {
@@ -60,7 +57,6 @@ describe('MongoDB data store Tests.', function () {
   });
   it('should store a record in weirdScores.', function (done) {
     var afterInsert = function (report) {
-      console.log(report);
       var selector = { _id: 'baed5aa21a92467021b0faf82837e9eaf93c4509' };
       scores.findOne(selector,
           function (err, obj) {
@@ -75,7 +71,6 @@ describe('MongoDB data store Tests.', function () {
     this.timeout(0);
     var insertCount = 0;
     var afterInsert = function (report) {
-      console.log(report);
       ++insertCount;
       if (insertCount === 2) {
         scores.count(function (err, count) {
