@@ -17,6 +17,7 @@
   "dependencies": {
     "camel-case": "^1.1.1",
     "csv-parse": "0.0.9",
+    "lodash": "^3.3.1",
     "mongodb": "^1.4.31"
   },
   "repository": {
